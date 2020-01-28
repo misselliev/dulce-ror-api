@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_27_201142) do
+ActiveRecord::Schema.define(version: 2020_01_27_225543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "schedules", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "talk_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["talk_id"], name: "index_schedules_on_talk_id"
+    t.index ["user_id"], name: "index_schedules_on_user_id"
+  end
+
+  create_table "talks", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "location"
+    t.date "date"
+    t.time "time"
+    t.string "speaker_name"
+    t.string "speaker_title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "creator_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -45,4 +67,7 @@ ActiveRecord::Schema.define(version: 2020_01_27_201142) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "schedules", "talks"
+  add_foreign_key "schedules", "users"
+  add_foreign_key "talks", "users", column: "creator_id"
 end
