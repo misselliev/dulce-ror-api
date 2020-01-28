@@ -7,4 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
+  has_many :talks,  :foreign_key=>"creator_id", :class_name => "Talk", dependent: :destroy
+  has_many :schedules, dependent: :destroy
+
 end
