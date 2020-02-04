@@ -1,7 +1,7 @@
 module Api
   module V1
     class TalksController < ApplicationController
-      # before_action :authenticate_api_v1_user!, only: [:index]
+      before_action :authenticate_api_v1_user!, only: [:index]
       def index
         @talks = Talk.all
         render json: @talks
