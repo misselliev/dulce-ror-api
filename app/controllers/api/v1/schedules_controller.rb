@@ -4,14 +4,12 @@ module Api
       before_action :authenticate_api_v1_user!, only: [:index, :show, :destroy]
 
       def index
-        # @schedules = Schedule.all
         @schedules = User.find(user_id: params[:id]).schedules
         render json: @schedules
       end
 
       def show
         @schedules = User.find(params[:id]).schedules
-        # @schedules = Schedule.find_by_id(params[:id])
         render json: @schedules
       end
 
@@ -25,7 +23,7 @@ module Api
       end
 
       def destroy
-        @schedule = Schedule.find_by(talk_id: params[:id])
+        @schedule = @current_api_v1_user.schedules.find(params[:id])
         @schedule.destroy
       end
 
