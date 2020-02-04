@@ -2,13 +2,14 @@ module Api
   module V1
     class SchedulesController < ApplicationController
       def index
-        @schedules = Schedule.all
+        # @schedules = Schedule.all
+        @schedules = User.find(user_id: params[:id]).schedules
         render json: @schedules
       end
 
       def show
-        # @schedules = User.find(params[:id]).schedules
-        @schedules = Schedule.find_by_id(params[:id])
+        @schedules = User.find(params[:id]).schedules
+        # @schedules = Schedule.find_by_id(params[:id])
         render json: @schedules
       end
 
