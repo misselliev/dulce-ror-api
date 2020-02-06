@@ -3,11 +3,6 @@ module Api
     class SchedulesController < ApplicationController
       before_action :authenticate_api_v1_user!, only: [:index, :show, :destroy]
 
-      def index
-        @schedules = User.find(user_id: params[:id]).schedules
-        render json: @schedules
-      end
-
       def show
         @schedules = User.find(params[:id]).schedules
         render json: @schedules
