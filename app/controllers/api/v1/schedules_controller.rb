@@ -8,11 +8,6 @@ module Api
         render json: @schedules
       end
 
-      def show
-        @schedules = User.find(params[:id]).schedules
-        render json: @schedules
-      end
-
       def create
         @schedule = Schedule.create(schedule_params)
         if @schedule.valid?
