@@ -5,7 +5,7 @@ module Api
     class TalksController < ApplicationController
       before_action :authenticate_api_v1_user!, only: [:index]
       def index
-        user_schedule = @current_api_v1_user.schedule.map { |item| item.talk.id }
+        user_schedule = @current_api_v1_user.schedules.map { |item| item.talk.id }
         filtered = Talk.where.not(id: user_schedule)
         render json: filtered
       end
