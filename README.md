@@ -17,6 +17,7 @@ To get a local copy up and running follow these simple example steps.
 - Download the repository.
 - Checkout to **development** branch.
 - In your terminal, run `bundle install` to load all the necessary files.
+- Run `rails db:create`, `rails db:migrate` and `rails db:seed` to set up your database
 - Run `rails s` to launch the API.
 
 
